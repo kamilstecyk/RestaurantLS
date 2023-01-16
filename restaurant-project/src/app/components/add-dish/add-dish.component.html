@@ -5,33 +5,33 @@
                 <div class="form-items">
                     <h3>Dodaj nowe danie</h3>
                     <p>Uzupełnij dane</p>
-                    <form class="requires-validation" novalidate>
+                    <form class="requires-validation" [noValidate]="false" (submit)="this.onSubmit()" >
 
                         <div class="d-flex">
 
                             <div>
                                 <div class="col-md-12 mt-5">
-                                    <input class="form-control" type="text" name="dish_name" placeholder="Nazwa dania" required>
+                                    <input class="form-control" type="text" name="dish_name" placeholder="Nazwa dania" [(ngModel)]="dish.name" required [ngModelOptions]="{standalone: true}">
                                     <div class="invalid-feedback">Nieprawidłowa nazwa dania!</div>
                                  </div>
          
                                  <div class="col-md-12">
-                                     <input class="form-control" type="text" name="cuisine_type" placeholder="Typ kuchni" required>
+                                     <input class="form-control" type="text" name="cuisine_type" placeholder="Typ kuchni" [(ngModel)]="dish.cuisine_type" required [ngModelOptions]="{standalone: true}">
                                      <div class="invalid-feedback">Nieprawidłowy typ kuchni!</div>
                                  </div>
                                  
                                  <div class="col-md-12">
-                                     <input class="form-control" type="text" name="dish_category" placeholder="Kategoria dania" required>
+                                     <input class="form-control" type="text" name="dish_category" placeholder="Kategoria dania" [(ngModel)]="dish.category" required [ngModelOptions]="{standalone: true}">
                                      <div class="invalid-feedback">Nieprawidłowa kategoria dania!</div>
                                  </div>
 
                                  <div class="col-md-12 mt-3">
-                                    <input class="form-control" type="number" name="dish_max_amount" placeholder="Maksymalna ilość dania" required>
+                                    <input class="form-control" type="number" name="dish_max_amount" placeholder="Maksymalna ilość dania" [(ngModel)]="dish.max_amount" required [ngModelOptions]="{standalone: true}">
                                     <div class="invalid-feedback">Nieprawidłowa ilość dania!</div>
                                 </div>
         
                                 <div class="col-md-12 mt-3">
-                                    <input class="form-control" type="number" name="dish_price" placeholder="Cena dania" required>
+                                    <input class="form-control" type="text" name="dish_price" placeholder="Cena dania" [(ngModel)]="dish.price" pattern="[+-]?([0-9]+[.])?[0-9]+" required [ngModelOptions]="{standalone: true}">
                                     <div class="invalid-feedback">Nieprawidłowa cena dania!</div>
                                 </div>
 
@@ -45,19 +45,19 @@
                                 
                                 <div class="mb-3 mt-2">
                                     <label for="dish_ingredients" class="form-label">Lista składników dania:</label>
-                                    <textarea class="form-control" id="dish_ingredients"  name="dish_ingredients" rows="2"></textarea>
+                                    <textarea class="form-control" id="dish_ingredients"  name="dish_ingredients" rows="2" [(ngModel)]="dish.ingredients" [ngModelOptions]="{standalone: true}"></textarea>
                                     <div class="invalid-feedback">Nieprawidłowy format listy składników!</div>
                                 </div>
 
                                 <div class="mb-3 mt-2">
                                     <label for="dish_desc" class="form-label">Opis dania:</label>
-                                    <textarea class="form-control" id="dish_desc"  name="dish_desc" rows="2"></textarea>
+                                    <textarea class="form-control" id="dish_desc"  name="dish_desc" rows="2" [(ngModel)]="dish.description" [ngModelOptions]="{standalone: true}"></textarea>
                                     <div class="invalid-feedback">Nieprawidłowy opis dania!</div>
                                 </div>
                                 
                                 <div class="mb-3 mt-2">
                                     <label for="dish_imgs" class="form-label">Zdjęcia dania:</label>
-                                    <textarea class="form-control" id="dish_imgs"  name="dish_imgs" rows="2"></textarea>
+                                    <textarea class="form-control" id="dish_imgs"  name="dish_imgs" rows="2" [(ngModel)]="dish.imgs" [ngModelOptions]="{standalone: true}"></textarea>
                                     <div class="invalid-feedback">Nieprawidłowy format zdjęć dania!</div>
                                 </div>
 

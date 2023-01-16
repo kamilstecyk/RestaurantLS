@@ -14,11 +14,14 @@ import { HomePageComponent } from './components/home-page/home-page.component';
 import { DishDetailsComponent } from './components/dish-details/dish-details.component';
 import { ShoppingHistoryComponent } from './components/shopping-history/shopping-history.component';
 import { AddDishComponent } from './components/add-dish/add-dish.component';
+import { ReactiveFormsModule } from '@angular/forms';
+
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
   apiKey: "AIzaSyCMKOMmRzapbTgl4a_9KYOGIVx8mipCquw",
   authDomain: "restauracja-9c7e8.firebaseapp.com",
+  databaseURL: "https://restauracja-9c7e8-default-rtdb.firebaseio.com",
   projectId: "restauracja-9c7e8",
   storageBucket: "restauracja-9c7e8.appspot.com",
   messagingSenderId: "420946017599",
@@ -41,7 +44,8 @@ const firebaseConfig = {
     AppRoutingModule,
     FormsModule,
     AngularFireModule.initializeApp(firebaseConfig),
-    AngularFireDatabaseModule
+    AngularFireDatabaseModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

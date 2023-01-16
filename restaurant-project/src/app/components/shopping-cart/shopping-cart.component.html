@@ -1,0 +1,49 @@
+<section class="h-100" style="background-color: #eee; min-height: 93vh;">
+    <div class="container h-100 py-5">
+      <div class="row d-flex justify-content-center align-items-center h-100">
+        <div class="col-10">
+  
+          <div class="d-flex justify-content-between align-items-center mb-4">
+            <h3 class="fw-normal mb-0 text-black">Koszyk zakupowy</h3>
+            <img id="extend_cart_icon" src="../../../assets/bx-chevrons-down.svg" alt="extend icon"/>
+          </div>
+
+          <div id="products">
+
+            <div class="card rounded-3 mb-4">
+                <div class="card-body p-4">
+                  <div class="row d-flex justify-content-between align-items-center">
+                    <div class="col-md-2 col-lg-2 col-xl-2">
+                      <img
+                        src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-shopping-carts/img1.webp"
+                        class="img-fluid rounded-3 dish_img" alt="Cotton T-shirt">
+                    </div>
+                    <div class="col-md-3 col-lg-3 col-xl-3">
+                      <p class="lead fw-normal mb-2"><a [routerLink]="['/szczegoly-dania', 2]">Spaghetti Bolognese</a></p>
+                      <p><span class="text-muted">Typ kuchni:</span> Włoska <span class="text-muted">Kategoria: </span>Mięsne</p>
+                    </div>
+                    <div class="col-md-3 col-lg-3 col-xl-2 d-flex">
+                      <input id="form1" min="0" name="quantity" value="1" type="number"
+                        class="form-control form-control-sm text-center" disabled />
+                    </div>
+                    <div class="col-md-3 col-lg-2 col-xl-2 offset-lg-1 m-3 m-md-0">
+                      <h5 class="mb-0">$499.00</h5>
+                      <h6 class="mb-0">($499.00)</h6>
+                    </div>
+                  </div>
+                </div>
+              </div>
+             
+          </div>
+  
+          <div class="card">
+            <div class="card-body">
+              <h3 class="mb-3">Suma zamówienia: $499.00</h3>
+              <button type="button" class="btn btn-warning btn-block btn-lg">Proceed to Pay</button>
+            </div>
+          </div>
+  
+        </div>
+      </div>
+    </div>
+  </section>

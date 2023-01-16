@@ -1,0 +1,72 @@
+<div class="form-body">
+    <div class="row">
+        <div class="form-holder">
+            <div class="form-content">
+                <div class="form-items">
+                    <h3>Dodaj nowe danie</h3>
+                    <p>Uzupełnij dane</p>
+                    <form class="requires-validation" novalidate>
+
+                        <div class="d-flex">
+
+                            <div>
+                                <div class="col-md-12 mt-5">
+                                    <input class="form-control" type="text" name="dish_name" placeholder="Nazwa dania" required>
+                                    <div class="invalid-feedback">Nieprawidłowa nazwa dania!</div>
+                                 </div>
+         
+                                 <div class="col-md-12">
+                                     <input class="form-control" type="text" name="cuisine_type" placeholder="Typ kuchni" required>
+                                     <div class="invalid-feedback">Nieprawidłowy typ kuchni!</div>
+                                 </div>
+                                 
+                                 <div class="col-md-12">
+                                     <input class="form-control" type="text" name="dish_category" placeholder="Kategoria dania" required>
+                                     <div class="invalid-feedback">Nieprawidłowa kategoria dania!</div>
+                                 </div>
+
+                                 <div class="col-md-12 mt-3">
+                                    <input class="form-control" type="number" name="dish_max_amount" placeholder="Maksymalna ilość dania" required>
+                                    <div class="invalid-feedback">Nieprawidłowa ilość dania!</div>
+                                </div>
+        
+                                <div class="col-md-12 mt-3">
+                                    <input class="form-control" type="number" name="dish_price" placeholder="Cena dania" required>
+                                    <div class="invalid-feedback">Nieprawidłowa cena dania!</div>
+                                </div>
+
+                                <div class="form-button mt-5">
+                                    <button id="submit" type="submit" class="btn btn-primary btn-lg mt-5">Dodaj do menu</button>
+                                </div>
+
+                            </div>
+
+                            <div class="ms-5">
+                                
+                                <div class="mb-3 mt-2">
+                                    <label for="dish_ingredients" class="form-label">Lista składników dania:</label>
+                                    <textarea class="form-control" id="dish_ingredients"  name="dish_ingredients" rows="2"></textarea>
+                                    <div class="invalid-feedback">Nieprawidłowy format listy składników!</div>
+                                </div>
+
+                                <div class="mb-3 mt-2">
+                                    <label for="dish_desc" class="form-label">Opis dania:</label>
+                                    <textarea class="form-control" id="dish_desc"  name="dish_desc" rows="2"></textarea>
+                                    <div class="invalid-feedback">Nieprawidłowy opis dania!</div>
+                                </div>
+                                
+                                <div class="mb-3 mt-2">
+                                    <label for="dish_imgs" class="form-label">Zdjęcia dania:</label>
+                                    <textarea class="form-control" id="dish_imgs"  name="dish_imgs" rows="2"></textarea>
+                                    <div class="invalid-feedback">Nieprawidłowy format zdjęć dania!</div>
+                                </div>
+
+                            </div>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

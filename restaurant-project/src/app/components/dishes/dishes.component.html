@@ -1,11 +1,10 @@
-<div class="container d-flex justify-content-center mt-50 mb-50">
-            
+<div class="container d-flex justify-content-center mt-50 mb-50">  
     <div class="row">
        <div class="col-md-5 mt-2" *ngFor="let dish of this.dishes">
-            <div class="card" >
+            <div class="card" [style.border]="dish.price == highest_price ? '5px solid red' : ( dish.price == cheapest_price ? '5px solid green' : '' )" >
                                 <div class="card-body">
                                     <div class="card-img-actions">
-                                        <a [routerLink]="['/szczegoly-dania/', 2]" ><img src="{{ dish.imgs != null ? dish.imgs[0] : '' }}" class="card-img img-fluid"  alt="dish img"></a>
+                                        <a [routerLink]="['/szczegoly-dania/', dish.key]" ><img src="{{ dish.imgs != null ? dish.imgs[0] : '' }}" class="card-img img-fluid"  alt="dish img"></a>
                                     </div>
                                 </div>
 
@@ -27,7 +26,6 @@
                                     
                                 </div>
                             </div>
-              
        </div> 
     </div>
 </div>

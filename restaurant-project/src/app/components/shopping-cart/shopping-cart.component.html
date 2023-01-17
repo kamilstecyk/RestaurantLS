@@ -5,30 +5,39 @@
   
           <div class="d-flex justify-content-between align-items-center mb-4">
             <h3 class="fw-normal mb-0 text-black">Koszyk zakupowy</h3>
-            <img id="extend_cart_icon" src="../../../assets/bx-chevrons-down.svg" alt="extend icon"/>
+            <img id="extend_cart_icon" src="../../../assets/bx-chevrons-down.svg" alt="extend icon" (click)="handleExtendingBtn()"/>
           </div>
 
-          <div id="products">
+          <div id="products" *ngIf="this.is_shopping_cart_extended">
 
-            <div class="card rounded-3 mb-4">
+            <div class="card rounded-3 mb-4" *ngFor="let order_record of this.currently_ordered_dishes">
                 <div class="card-body p-4">
                   <div class="row d-flex justify-content-between align-items-center">
-                    <div class="col-md-2 col-lg-2 col-xl-2">
-                      <img
-                        src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-shopping-carts/img1.webp"
-                        class="img-fluid rounded-3 dish_img" alt="Cotton T-shirt">
-                    </div>
                     <div class="col-md-3 col-lg-3 col-xl-3">
-                      <p class="lead fw-normal mb-2"><a [routerLink]="['/szczegoly-dania', 2]">Spaghetti Bolognese</a></p>
-                      <p><span class="text-muted">Typ kuchni:</span> Włoska <span class="text-muted">Kategoria: </span>Mięsne</p>
+                      <p class="lead fw-normal mb-2"><a [routerLink]="['/szczegoly-dania', order_record.dish_key]">{{ order_record.dish_name }}</a></p>
+                      <!-- <p><span class="text-muted">Typ kuchni:</span> Włoska <span class="text-muted">Kategoria: </span>Mięsne</p> -->
                     </div>
                     <div class="col-md-3 col-lg-3 col-xl-2 d-flex">
-                      <input id="form1" min="0" name="quantity" value="1" type="number"
+                      <button class="btn px-2"
+                        (click)="this.removeFromShoppingCart(order_record)">
+                        -
+                      </button> 
+
+                      <input id="form1" min="0" name="quantity" value="{{order_record.amount_to_order}}" type="number"
                         class="form-control form-control-sm text-center" disabled />
+
+                        <button class="btn px-2"
+                        (click)="this.addToShoppingCart(order_record)">
+                        +
+                      </button>
+
                     </div>
                     <div class="col-md-3 col-lg-2 col-xl-2 offset-lg-1 m-3 m-md-0">
-                      <h5 class="mb-0">$499.00</h5>
-                      <h6 class="mb-0">($499.00)</h6>
+                      <h5 class="mb-0"> {{(order_record.price_per_dish * order_record.amount_to_order).toFixed(2)}} PLN</h5>
+                      <h6 class="mb-0">({{order_record.price_per_dish}}) PLN</h6>
+                    </div>
+                    <div class="col-md-1 col-lg-1 col-xl-1 text-end">
+                      <img (click)="this.removeDishTotallyFromShoppingCart(order_record.dish_key)" class="icon" src="../../../assets/bxs-trash.svg" />
                     </div>
                   </div>
                 </div>
@@ -38,8 +47,8 @@
   
           <div class="card">
             <div class="card-body">
-              <h3 class="mb-3">Suma zamówienia: $499.00</h3>
-              <button type="button" class="btn btn-warning btn-block btn-lg">Proceed to Pay</button>
+              <h3 class="mb-3">Suma zamówienia: {{ this.getSumOfOrder() }} PLN </h3>
+              <button type="button" (click)="this.buyDishes()" class="btn btn-warning btn-block btn-lg">Dokonaj zakupu</button>
             </div>
           </div>
   

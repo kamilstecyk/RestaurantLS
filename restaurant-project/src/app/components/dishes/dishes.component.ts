@@ -40,7 +40,6 @@ export class DishesComponent implements OnDestroy {
 
           for(let dishWithItStateRecord of this.dishesWithItsOrderRecords)
           {
-            console.log("I am here!!!");
 
             if(record.dish_key === dishWithItStateRecord.dish?.key && record.amount_to_order >= 0)
             {

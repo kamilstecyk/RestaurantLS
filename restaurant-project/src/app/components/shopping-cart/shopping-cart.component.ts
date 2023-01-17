@@ -3,6 +3,7 @@ import { ShoppingCartService } from 'src/app/services/shopping-cart.service';
 import { DishService } from 'src/app/services/dish.service';
 import { OrderRecord } from 'src/app/services/shopping-cart.service';
 import { BuyService } from 'src/app/services/buy.service';
+import { ExchangeCurrencyService } from 'src/app/services/exchange-currency.service';
 @Component({
   selector: 'app-shopping-cart',
   templateUrl: './shopping-cart.component.html',
@@ -14,7 +15,7 @@ export class ShoppingCartComponent {
   currently_ordered_dishes_subscription: any;
   current_sum_of_order: string = "0.00";
 
-  constructor(private shoppingCartService: ShoppingCartService, private dishService: DishService, private buyService: BuyService)
+  constructor(private shoppingCartService: ShoppingCartService, private dishService: DishService, private buyService: BuyService, public exchangeCurrencyService: ExchangeCurrencyService)
   {
     this.getShoppingCartRecords();
   }
@@ -68,7 +69,7 @@ export class ShoppingCartComponent {
   {
     this.currently_ordered_dishes.forEach((record)=>
     {
-      const updated_max_amount_value = { dish_max_amount : (record.max_amount_to_order - record.amount_to_order) };
+      const updated_max_amount_value = { max_amount : (record.max_amount_to_order - record.amount_to_order) };
       if(record.dish_key)
         this.dishService.update(record.dish_key, updated_max_amount_value);
     }); 
@@ -76,7 +77,7 @@ export class ShoppingCartComponent {
 
   getSumOfOrder()
   {
-    return  this.shoppingCartService.getSumOfOrder();
+    return  this.exchangeCurrencyService.getPriceInDollars(Number(this.shoppingCartService.getSumOfOrder()));
   }
 
    ngOnDestroy() {

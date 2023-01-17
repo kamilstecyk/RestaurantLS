@@ -29,6 +29,7 @@ export class AddDishComponent {
       console.log("The dish has been added to restaurant menu!");
       // reset form
       this.dish = new Dish();
+      alert("Pomyślnie dodano danie do menu!");
     }
     catch(err)
     {

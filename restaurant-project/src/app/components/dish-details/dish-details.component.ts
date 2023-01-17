@@ -6,6 +6,7 @@ import {ActivatedRoute} from '@angular/router';
 import { DishWithItShoppingState } from '../dishes/dishes.component';
 import { ShoppingCartService } from 'src/app/services/shopping-cart.service';
 import { OrderRecord } from 'src/app/services/shopping-cart.service';
+import { ExchangeCurrencyService } from 'src/app/services/exchange-currency.service';
 
 @Component({
   selector: 'app-dish-details',
@@ -19,7 +20,7 @@ export class DishDetailsComponent {
   dish_record: DishWithItShoppingState = new DishWithItShoppingState();
   currently_ordered_dishes_subscription: any;
 
-  constructor(private dishService: DishService, private activatedRoute: ActivatedRoute, private shoppingCartService: ShoppingCartService)
+  constructor(private dishService: DishService, private activatedRoute: ActivatedRoute, private shoppingCartService: ShoppingCartService, public exchangeCurrencyService: ExchangeCurrencyService)
   {
     this.dish_key = this.activatedRoute.snapshot.params['key'];
     this.getDish();

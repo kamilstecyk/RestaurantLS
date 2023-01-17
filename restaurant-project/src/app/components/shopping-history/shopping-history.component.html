@@ -21,8 +21,8 @@
                         <tr *ngFor="let history of this.history_records">
                           <td>{{ history.order_record?.dish_name }}</td>
                           <td>{{ history.order_record?.amount_to_order }}</td>
-                          <td>{{ this.getHistoryRecordFullPrice(history) }} PLN</td>
-                          <td>{{ history.order_record?.price_per_dish }} PLN</td>
+                          <td>{{ this.getHistoryRecordFullPrice(history) }}</td>
+                          <td>{{ this.exchangeCurrencyService.getPriceInDollars(history.order_record?.price_per_dish) }}</td>
                           <td>{{ history.date_of_order }}</td>
                         </tr>
                       </tbody>

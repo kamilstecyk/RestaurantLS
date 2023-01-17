@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { HistoryRecord } from 'src/app/services/buy.service';
 import { BuyService } from 'src/app/services/buy.service';
 import { map } from 'rxjs';
+import { ExchangeCurrencyService } from 'src/app/services/exchange-currency.service';
 
 @Component({
   selector: 'app-shopping-history',
@@ -12,7 +13,7 @@ export class ShoppingHistoryComponent {
   history_records: HistoryRecord[] = [];
   history_records_subscription: any;
 
-  constructor(private buyService: BuyService)
+  constructor(private buyService: BuyService, public exchangeCurrencyService: ExchangeCurrencyService)
   {
     this.getAllHistoryRecords();
   }
@@ -32,10 +33,10 @@ export class ShoppingHistoryComponent {
     )
   }
 
-  getHistoryRecordFullPrice(record: HistoryRecord): string 
+  getHistoryRecordFullPrice(record: HistoryRecord): String 
   {
     if(record.order_record?.amount_to_order)
-      return (record.order_record?.amount_to_order * Number(record.order_record?.price_per_dish)).toFixed(2);
+      return this.exchangeCurrencyService.getPriceInDollars(record.order_record?.amount_to_order * Number(record.order_record?.price_per_dish));
     
     return "0.00";
   }

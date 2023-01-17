@@ -4,6 +4,7 @@ import { DishService } from '../../services/dish.service';
 import { map } from 'rxjs';
 import { ShoppingCartService } from 'src/app/services/shopping-cart.service';
 import { OrderRecord } from 'src/app/services/shopping-cart.service';
+import { ExchangeCurrencyService } from 'src/app/services/exchange-currency.service';
 
 export class DishWithItShoppingState
 {
@@ -22,7 +23,7 @@ export class DishesComponent implements OnDestroy {
   currently_ordered_dishes_subscription: any;
   dishesWithItsOrderRecords: DishWithItShoppingState[] = [];
 
-  constructor(private dishService: DishService, private shoppingCartService: ShoppingCartService)
+  constructor(private dishService: DishService, private shoppingCartService: ShoppingCartService, public exchangeCurrencyService: ExchangeCurrencyService)
   {
     this.getAllDishes();
   }
@@ -63,6 +64,7 @@ export class DishesComponent implements OnDestroy {
       )
     ).subscribe(data => {
         // data =  data as Dish[];
+        this.dishesWithItsOrderRecords = [];
 
         data.forEach((dish)=>
         {
@@ -88,9 +90,9 @@ export class DishesComponent implements OnDestroy {
       this.shoppingCartService.removeDish(dish);
   }
 
-  removeDishFromMenu(dish: Dish)
+  removeDishFromMenu(dish: Dish | undefined)
   {
-    if(dish.key)
+    if(dish != undefined && dish.key)
     {
       if (confirm('Are you sure you want to delete this dish from menu?')) {
         this.dishService.delete(dish.key);

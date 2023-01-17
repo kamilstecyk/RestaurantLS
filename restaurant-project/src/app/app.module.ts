@@ -15,7 +15,7 @@ import { DishDetailsComponent } from './components/dish-details/dish-details.com
 import { ShoppingHistoryComponent } from './components/shopping-history/shopping-history.component';
 import { AddDishComponent } from './components/add-dish/add-dish.component';
 import { ReactiveFormsModule } from '@angular/forms';
-
+import {NgxPaginationModule} from 'ngx-pagination';
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
@@ -45,7 +45,8 @@ const firebaseConfig = {
     FormsModule,
     AngularFireModule.initializeApp(firebaseConfig),
     AngularFireDatabaseModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    NgxPaginationModule
   ],
   providers: [],
   bootstrap: [AppComponent]

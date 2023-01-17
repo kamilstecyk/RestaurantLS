@@ -116,6 +116,36 @@ export class DishDetailsComponent {
     return 'green';
   }
 
+  getIfAddToCartBtnIsDisabled(record :DishWithItShoppingState)
+  {
+    if(record.orderRecord?.getAvailableAmount() == undefined)
+    {
+      return false;
+    }
+
+    if(record.orderRecord?.getAvailableAmount() > 0)
+    {
+      return false;
+    }
+
+    return true;
+  }
+
+  getIfRemoveFromCartBtnIsDisabled(record :DishWithItShoppingState)
+  {
+    if(record.orderRecord?.getAvailableAmount() == undefined )
+    {
+      return true;
+    }
+
+    if(record.orderRecord.getAvailableAmount() == record.dish?.max_amount)
+    {
+      return true;
+    }
+
+    return false;
+    
+  }
 
   ngOnDestroy(): void {
     if(this.currently_ordered_dishes_subscription)

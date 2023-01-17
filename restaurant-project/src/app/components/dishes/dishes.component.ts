@@ -23,6 +23,12 @@ export class DishesComponent implements OnDestroy {
   currently_ordered_dishes_subscription: any;
   dishesWithItsOrderRecords: DishWithItShoppingState[] = [];
 
+  // paginator
+  page: number = 1;
+  count: number = 2;
+  tableSize: number = 2;
+  tableSizes: any = [1, 2, 3, 6, 9, 12];
+
   constructor(private dishService: DishService, private shoppingCartService: ShoppingCartService, public exchangeCurrencyService: ExchangeCurrencyService)
   {
     this.getAllDishes();
@@ -117,6 +123,46 @@ export class DishesComponent implements OnDestroy {
     }
 
     return 'green';
+  }
+
+  getIfAddToCartBtnIsDisabled(record :DishWithItShoppingState)
+  {
+    if(record.orderRecord?.getAvailableAmount() == undefined)
+    {
+      return false;
+    }
+
+    if(record.orderRecord?.getAvailableAmount() > 0)
+    {
+      return false;
+    }
+
+    return true;
+  }
+
+  getIfRemoveFromCartBtnIsDisabled(record :DishWithItShoppingState)
+  {
+    if(record.orderRecord?.getAvailableAmount() == undefined )
+    {
+      return true;
+    }
+
+    if(record.orderRecord.getAvailableAmount() == record.dish?.max_amount)
+    {
+      return true;
+    }
+
+    return false;
+    
+  }
+
+  handlePageChange(event: any) {
+    this.page = event;
+  }
+
+  handlePageSizeChange(event: any): void {
+    this.tableSize = event.target.value;
+    this.page = 1;
   }
 
   ngOnDestroy(): void {

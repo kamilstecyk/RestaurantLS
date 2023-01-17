@@ -1,6 +1,7 @@
 <div class="container d-flex justify-content-center mt-50 mb-50">  
     <div class="row">
-       <div class="col-md-5 mt-2" *ngFor="let record of this.dishesWithItsOrderRecords; let i = index" >
+       <div class="mt-2 {{ tableSize == 1 ? 'col-10' : 'col-md-5' }}" *ngFor="let record of this.dishesWithItsOrderRecords | paginate: { itemsPerPage: tableSize,
+        currentPage: page }, let i = index" >
             <div class="card" [style.border]="record.dish?.price == highest_price ? '5px solid red' : ( record.dish?.price == cheapest_price ? '5px solid green' : '' )" >
                                 <div class="card-body">
                                     <div class="card-img-actions">
@@ -21,11 +22,28 @@
                                     <div class="text-muted">Kategoria: {{ record.dish?.category }}</div>
                                     <div class="text-muted" id="dish_availability">Ilość: <span [style.color]="getFontColordependingOfAvailability(record.orderRecord)">{{ record.orderRecord?.getAvailableAmount() != undefined ? record.orderRecord?.getAvailableAmount() : record.dish?.max_amount }}</span></div>
 
-                                    <button type="button" (click)="this.addToShoppingCart(record.dish)" class="btn bg-cart mt-4"><i class="fa fa-cart-plus mr-2"></i> Dodaj do koszyka</button>
-                                    <button type="button" (click)="this.removeFromShoppingCart(record.dish)" class="btn bg-dark text-light mt-4">Usuń z koszyka</button>
+                                    <button type="button" [disabled]="getIfAddToCartBtnIsDisabled(record)" (click)="this.addToShoppingCart(record.dish)" class="btn bg-cart mt-4"><i class="fa fa-cart-plus mr-2"></i> Dodaj do koszyka</button>
+                                    <button type="button" [disabled]="getIfRemoveFromCartBtnIsDisabled(record)" (click)="this.removeFromShoppingCart(record.dish)" class="btn bg-dark text-light mt-4">Usuń z koszyka</button>
                                     <button class="btn bg-danger mt-3 btn-sm" (click)="this.removeDishFromMenu(record.dish)">Usuń z menu</button>
                                 </div>
                             </div>
        </div> 
     </div>
+</div>
+
+<div style="display: flex; flex-direction: column; justify-content: center; align-items: center; width: 90vw;">
+        <pagination-controls
+                (pageChange)="handlePageChange($event)"
+                [responsive]="true"
+                previousLabel="Previous"
+                nextLabel="Next" >
+        </pagination-controls>
+        <div class="d-flex">
+            <h5 class="ms-3 me-2">    Items per Page:   </h5>
+            <select (change)="handlePageSizeChange($event)">
+                <option *ngFor="let size of tableSizes" [ngValue]="size" [selected]="size === this.tableSize">
+                    {{ size }}
+                </option>
+            </select>
+        </div>
 </div>

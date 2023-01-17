@@ -7,7 +7,7 @@
       <div class="collapse navbar-collapse ms-4" id="navbarNavAltMarkup">
         <div class="navbar-nav">
           <a class="nav-link" routerLink="/menu">Menu</a>
-          <a class="nav-link" routerLink="/koszyk-zakupowy">Koszyk</a>
+          <a class="nav-link" routerLink="/koszyk-zakupowy">Koszyk<span *ngIf="this.count_of_ordered_dishes > 0" class="badge text-dark ms-1 {{ this.count_of_ordered_dishes < 10 ? 'bg-warning' : 'bg-info'}} ">{{ this.count_of_ordered_dishes }}</span></a>
           <a class="nav-link" routerLink="/dodaj-danie">Dodaj danie</a>
           <a class="nav-link" routerLink="/historia-zakupow" >Historia</a>
         </div>

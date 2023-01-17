@@ -1,6 +1,6 @@
-<div id="carouselExampleControls" class="carousel slide m-5" data-bs-ride="carousel" *ngIf="this.dish.imgs != undefined">
-    <div class="carousel-inner carousel_img_wrapper">
-      <div class="carousel-item {{ i == 0 ? 'active' : ''}}" *ngFor="let img of this.dish.imgs, let i = index">
+<div id="carouselExampleControls" class="carousel slide m-5" data-bs-ride="carousel" *ngIf="this.dish_record.dish?.imgs != null">
+    <div class="carousel-inner carousel_img_wrapper" >
+      <div class="carousel-item {{ i == 0 ? 'active' : ''}}" *ngFor="let img of this.dish_record.dish?.imgs, let i = index">
         <img src="{{ img }}" class="d-block slider_img" alt="Dish img">
       </div>
     </div>
@@ -14,7 +14,7 @@
     </button>
 </div>
 
-<div class="container d-flex justify-content-center mt-50 mb-50" *ngIf="this.dish != undefined">      
+<div class="container d-flex justify-content-center mt-50 mb-50" *ngIf="this.dish_record.dish != undefined">      
     <div class="row">
        <div class="col-md-12 mt-2">
             <div class="card">
@@ -31,18 +31,18 @@
                                         </h6>
                                     </div>
 
-                                    <h3 class="mb-0 font-weight-semibold">{{ this.dish.price }} PLN</h3>
+                                    <h3 class="mb-0 font-weight-semibold">{{ this.dish_record.dish.price }} PLN</h3>
 
-                                    <div class="text-muted mt-2">Typ kuchni: {{ this.dish.cuisine_type }}</div>
+                                    <div class="text-muted mt-2">Typ kuchni: {{ this.dish_record.dish.cuisine_type }}</div>
                                     <div class="text-muted">Kategoria: Mięsne</div>
-                                    <div class="text-muted" id="dish_availability">Ilość: {{ this.dish.max_amount }}</div>
+                                    <div class="text-muted" id="dish_availability">Ilość: <span [style.color]="getFontColordependingOfAvailability(dish_record.orderRecord)">{{ dish_record.orderRecord?.getAvailableAmount() != undefined ? dish_record.orderRecord?.getAvailableAmount() : dish_record.dish.max_amount }}</span></div>
 
-                                    <ul class="m-3" *ngIf="dish.ingredients != undefined">
+                                    <ul class="m-3" *ngIf="this.dish_record.dish.ingredients != undefined">
                                         <h5>Składniki: </h5>
-                                        <li *ngFor="let ingredient of this.dish.ingredients">{{ ingredient }}</li>
+                                        <li *ngFor="let ingredient of this.dish_record.dish?.ingredients">{{ ingredient }}</li>
                                     </ul>
 
-                                    <div class="text-muted mt-3 mb-3" id="dish_availability">{{ this.dish.description }}</div>
+                                    <div class="text-muted mt-3 mb-3" id="dish_availability">{{ this.dish_record.dish.description }}</div>
 
                                     <!-- <div>
                                        <i class="fa fa-star star"></i>
@@ -54,8 +54,8 @@
                                     <div class="text-muted mb-3">34 reviews</div> -->
 
                                     <div class="d-flex">
-                                        <button type="button" class="btn bg-cart"><i class="fa fa-cart-plus mr-2"></i> Dodaj do koszyka</button>
-                                        <button type="button" class="btn bg-dark text-light">Usuń z koszyka</button>
+                                        <button type="button" (click)="this.addToShoppingCart(dish_record.dish)" class="btn bg-cart mt-4"><i class="fa fa-cart-plus me-2"></i> Dodaj do koszyka</button>
+                                        <button type="button" (click)="this.removeFromShoppingCart(dish_record.dish)" class="btn bg-dark text-light mt-4">Usuń z koszyka</button>
                                     </div>
                                     
                                 </div>

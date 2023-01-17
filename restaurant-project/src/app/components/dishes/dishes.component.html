@@ -1,28 +1,28 @@
 <div class="container d-flex justify-content-center mt-50 mb-50">  
     <div class="row">
-       <div class="col-md-5 mt-2" *ngFor="let dish of this.dishes">
-            <div class="card" [style.border]="dish.price == highest_price ? '5px solid red' : ( dish.price == cheapest_price ? '5px solid green' : '' )" >
+       <div class="col-md-5 mt-2" *ngFor="let record of this.dishesWithItsOrderRecords; let i = index" >
+            <div class="card" [style.border]="record.dish?.price == highest_price ? '5px solid red' : ( record.dish?.price == cheapest_price ? '5px solid green' : '' )" >
                                 <div class="card-body">
                                     <div class="card-img-actions">
-                                        <a [routerLink]="['/szczegoly-dania/', dish.key]" ><img src="{{ dish.imgs != null ? dish.imgs[0] : '' }}" class="card-img img-fluid"  alt="dish img"></a>
+                                        <a [routerLink]="['/szczegoly-dania/', record.dish?.key]" ><img src="{{ this.getFirstImgOfDish(record.dish) }}" class="card-img img-fluid"  alt="dish img"></a>
                                     </div>
                                 </div>
 
                                 <div class="card-body bg-light text-center">
                                     <div class="mb-2">
                                         <h6 class="font-weight-semibold mb-2">
-                                            <a [routerLink]="['/szczegoly-dania/', 2]" class="text-warning mb-2" data-abc="true">{{ dish.name }}</a>
+                                            <a [routerLink]="['/szczegoly-dania/', 2]" class="text-warning mb-2" data-abc="true">{{ record.dish?.name }}</a>
                                         </h6>
                                     </div>
 
-                                    <h3 class="mb-0 font-weight-semibold">{{ dish.price }} PLN</h3>
+                                    <h3 class="mb-0 font-weight-semibold">{{ record.dish?.price }} PLN</h3>
 
-                                    <div class="text-muted mt-2">Typ kuchni: {{ dish.cuisine_type }}</div>
-                                    <div class="text-muted">Kategoria: {{ dish.category }}</div>
-                                    <div class="text-muted" id="dish_availability">Ilość: {{ dish.max_amount }}</div>
+                                    <div class="text-muted mt-2">Typ kuchni: {{ record.dish?.cuisine_type }}</div>
+                                    <div class="text-muted">Kategoria: {{ record.dish?.category }}</div>
+                                    <div class="text-muted" id="dish_availability">Ilość: <span [style.color]="getFontColordependingOfAvailability(record.orderRecord)">{{ record.orderRecord?.getAvailableAmount() != undefined ? record.orderRecord?.getAvailableAmount() : record.dish?.max_amount }}</span></div>
 
-                                    <button type="button" class="btn bg-cart mt-4"><i class="fa fa-cart-plus mr-2"></i> Dodaj do koszyka</button>
-                                    <button type="button" class="btn bg-dark text-light">Usuń z koszyka</button>
+                                    <button type="button" (click)="this.addToShoppingCart(record.dish)" class="btn bg-cart mt-4"><i class="fa fa-cart-plus mr-2"></i> Dodaj do koszyka</button>
+                                    <button type="button" (click)="this.removeFromShoppingCart(record.dish)" class="btn bg-dark text-light mt-4">Usuń z koszyka</button>
                                     
                                 </div>
                             </div>
